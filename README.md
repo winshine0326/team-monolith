@@ -43,7 +43,7 @@ for x in range(4):
 - 기본 문법 유지: for, if, while, 변수, 함수 호출
 - 농장 전용 API 함수 설계:
   - plant(x, y, crop): 작물 심기
-  - water(x, y): 물 주기  
+  - water(x, y): 물 주기
   - harvest(x, y): 수확
   - is_ready(x, y): 수확 가능 여부 확인
 - 단계별 미션으로 프로그래밍 개념 학습 유도
@@ -72,3 +72,11 @@ for x in range(4):
 이 PRD를 바탕으로 TODO.md를 작성해주고, markdown의 체크박스를 활용해서 각 페이즈에 어떤 테스크를 완료했는지 확인할 수 있도록 만들어줘.
 각 테스크가 끝나면 진행상황을 알 수 있도록 체크박스에 표시해줘.
 ```
+
+## 서비스 화면
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
