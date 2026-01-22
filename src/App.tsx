@@ -14,6 +14,7 @@ import { Shop } from "./components/Shop";
 import { HarvestModal } from "./components/HarvestModal";
 import { LoginButton } from "./components/LoginButton";
 import { useAutoSave } from "./hooks/useAutoSave";
+import { SeedStatus } from "./components/SeedStatus";
 
 const queryClient = new QueryClient();
 
@@ -116,6 +117,7 @@ function GameApp() {
           </Card>
 
           <MissionPanel />
+          <SeedStatus />
         </div>
 
         {/* 오른쪽: 코드 에디터 */}
