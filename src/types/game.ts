@@ -19,6 +19,7 @@ export interface GameState {
   seeds: Record<CropType, number>;
   grid: Tile[][];
   day: number;
+  lastHarvestIncome: number | null; // 최근 수확으로 얻은 수입 (모달 표시용)
 }
 
 // 코드 실행 결과

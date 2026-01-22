@@ -11,6 +11,7 @@ import { DEFAULT_CODE } from "./lib/constants";
 import { checkApiKey } from "./lib/openai";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Shop } from "./components/Shop";
+import { HarvestModal } from "./components/HarvestModal";
 
 const queryClient = new QueryClient();
 
@@ -163,6 +164,9 @@ function GameApp() {
 
       {/* 상점 */}
       <Shop />
+
+      {/* 수확 알림 모달 */}
+      <HarvestModal />
     </div>
   );
 }

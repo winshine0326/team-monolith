@@ -7,6 +7,8 @@ interface GameStore extends GameState {
   executeActions: (actions: FarmAction[]) => void;
   // 씨앗 구매
   buySeed: (crop: CropType, amount: number) => void;
+  // 수확 수입 리셋
+  resetHarvestIncome: () => void;
   // 리셋
   reset: () => void;
 }
@@ -35,6 +37,7 @@ const initialState: GameState = {
   seeds: { ...GAME_CONFIG.INITIAL_SEEDS },
   grid: createInitialGrid(),
   day: 1,
+  lastHarvestIncome: null,
 };
 
 export const useGameState = create<GameStore>((set) => ({
@@ -44,6 +47,7 @@ export const useGameState = create<GameStore>((set) => ({
     set((state) => {
       const newState = { ...state };
       const newGrid = state.grid.map((row) => row.map((tile) => ({ ...tile })));
+      let currentHarvestIncome = 0;
 
       for (const action of actions) {
         if (action.type === "plant") {
@@ -160,7 +164,9 @@ export const useGameState = create<GameStore>((set) => ({
 
           // 수확
           const cropInfo = CROPS[tile.crop];
-          newState.gold += cropInfo.sellPrice;
+          const income = cropInfo.sellPrice;
+          newState.gold += income;
+          currentHarvestIncome += income;
 
           // 타일 리셋
           tile.state = "empty";
@@ -174,7 +180,9 @@ export const useGameState = create<GameStore>((set) => ({
               const tile = newGrid[y][x];
               if (tile.state === "ready" && tile.crop) {
                 const cropInfo = CROPS[tile.crop];
-                newState.gold += cropInfo.sellPrice;
+                const income = cropInfo.sellPrice;
+                newState.gold += income;
+                currentHarvestIncome += income;
 
                 tile.state = "empty";
                 tile.crop = undefined;
@@ -188,6 +196,8 @@ export const useGameState = create<GameStore>((set) => ({
       return {
         ...newState,
         grid: newGrid,
+        lastHarvestIncome:
+          currentHarvestIncome > 0 ? currentHarvestIncome : null,
       };
     }),
 
@@ -208,6 +218,8 @@ export const useGameState = create<GameStore>((set) => ({
         },
       };
     }),
+
+  resetHarvestIncome: () => set({ lastHarvestIncome: null }),
 
   reset: () => set(initialState),
 }));
