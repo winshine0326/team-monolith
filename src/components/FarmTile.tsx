@@ -7,8 +7,8 @@ interface FarmTileProps {
 }
 
 export function FarmTile({ tile }: FarmTileProps) {
-  // 타일 상태에 따른 이모지 결정
-  const getEmoji = () => {
+  // 타일 상태에 따른 컨텐츠 렌더링
+  const renderContent = () => {
     if (tile.state === "empty") {
       return "🟫";
     }
@@ -26,7 +26,13 @@ export function FarmTile({ tile }: FarmTileProps) {
     }
 
     if (tile.state === "ready") {
-      return cropInfo.emoji.ready;
+      return (
+        <img
+          src={cropInfo.emoji.ready}
+          alt={cropInfo.name}
+          className="w-4/5 h-4/5 object-contain animate-bounce"
+        />
+      );
     }
 
     return "🟫";
@@ -35,14 +41,14 @@ export function FarmTile({ tile }: FarmTileProps) {
   return (
     <div
       className={cn(
-        "aspect-square flex items-center justify-center text-5xl",
+        "aspect-square flex items-center justify-center text-5xl overflow-hidden",
         "border-2 border-border rounded-lg bg-card",
         "transition-all hover:scale-105",
         "shadow-sm hover:shadow-md",
-        tile.state === "ready" && "ring-2 ring-green-500 animate-pulse bg-green-50"
+        tile.state === "ready" && "ring-2 ring-green-500 bg-green-50",
       )}
     >
-      {getEmoji()}
+      {renderContent()}
     </div>
   );
 }

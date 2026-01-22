@@ -1,4 +1,7 @@
 import type { CropInfo, CropType } from "@/types/game";
+import carrotImg from "@/assets/vegetables/carrot.svg";
+import tomatoImg from "@/assets/vegetables/tomato.svg";
+import pumpkinImg from "@/assets/vegetables/pumpkin.svg";
 
 // 게임 기본 설정
 export const GAME_CONFIG = {
@@ -21,7 +24,7 @@ export const CROPS: Record<CropType, CropInfo> = {
     emoji: {
       planted: "🌱",
       growing: "🌿",
-      ready: "🥕",
+      ready: carrotImg,
     },
   },
   tomato: {
@@ -32,7 +35,7 @@ export const CROPS: Record<CropType, CropInfo> = {
     emoji: {
       planted: "🌱",
       growing: "🌿",
-      ready: "🍅",
+      ready: tomatoImg,
     },
   },
   pumpkin: {
@@ -43,7 +46,7 @@ export const CROPS: Record<CropType, CropInfo> = {
     emoji: {
       planted: "🌱",
       growing: "🌿",
-      ready: "🎃",
+      ready: pumpkinImg,
     },
   },
 };

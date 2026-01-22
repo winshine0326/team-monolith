@@ -13,10 +13,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Shop } from "./components/Shop";
 import { HarvestModal } from "./components/HarvestModal";
 import { LoginButton } from "./components/LoginButton";
+import { useAutoSave } from "./hooks/useAutoSave";
 
 const queryClient = new QueryClient();
 
 function GameApp() {
+  useAutoSave(); // 자동 저장 활성화
+
   const [code, setCode] = useState(DEFAULT_CODE);
   const gameState = useGameState();
   const { mutate: executeCode, isPending, data } = useCodeExecution();

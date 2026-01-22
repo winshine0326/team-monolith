@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGameState } from "@/hooks/useGameState";
-import { supabase } from "@/lib/supabase";
+import { authApi } from "@/api/auth";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -20,7 +20,7 @@ export function LoginButton() {
 
   useEffect(() => {
     // 현재 세션 확인
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    authApi.getSession().then(({ session }) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         loadGame(session.user.id);
@@ -28,9 +28,7 @@ export function LoginButton() {
     });
 
     // 인증 상태 변경 리스너
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    const subscription = authApi.onAuthStateChange((session) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         loadGame(session.user.id);
@@ -41,16 +39,11 @@ export function LoginButton() {
   }, [loadGame]);
 
   const handleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.origin,
-      },
-    });
+    await authApi.loginWithGoogle();
   };
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
+    await authApi.logout();
   };
 
   const handleSave = async () => {

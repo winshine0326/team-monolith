@@ -2,7 +2,7 @@ import { create } from "zustand";
 import type { GameState, Tile, FarmAction, CropType } from "@/types/game";
 import { GAME_CONFIG, CROPS } from "@/lib/constants";
 
-import { supabase } from "@/lib/supabase";
+import { gameApi } from "@/api/game";
 
 interface GameStore extends GameState {
   // 액션 실행
@@ -44,6 +44,7 @@ const initialState: GameState = {
   grid: createInitialGrid(),
   day: 1,
   lastHarvestIncome: null,
+  isLoaded: false,
 };
 
 export const useGameState = create<GameStore>((set, get) => ({
@@ -231,49 +232,31 @@ export const useGameState = create<GameStore>((set, get) => ({
 
   saveGame: async (userId) => {
     const state = get();
-    // 저장할 데이터 (grid, gold, seeds, day)
-    const saveData = {
-      grid: state.grid,
-      gold: state.gold,
-      seeds: state.seeds,
-      day: state.day,
-    };
-
-    const { error } = await supabase.from("game_saves").upsert({
-      user_id: userId,
-      data: saveData,
-      updated_at: new Date().toISOString(),
-    });
-
-    if (error) {
-      console.error("데이터 저장 실패:", error);
-    } else {
+    try {
+      await gameApi.saveGame(userId, state);
       console.log("데이터 저장 완료");
+    } catch (error) {
+      // 에러 처리는 API 레이어에서 로깅함
     }
   },
 
   loadGame: async (userId) => {
-    const { data, error } = await supabase
-      .from("game_saves")
-      .select("data")
-      .eq("user_id", userId)
-      .single();
-
-    if (error) {
-      if (error.code !== "PGRST116") {
-        // 데이터 없음 에러가 아닐 경우
-        console.error("데이터 불러오기 실패:", error);
+    try {
+      const data = await gameApi.loadGame(userId);
+      if (data) {
+        set((state) => ({
+          ...state,
+          ...data,
+          isLoaded: true,
+        }));
+        console.log("데이터 불러오기 완료");
+      } else {
+        // 데이터가 없으면(신규 유저) 로드 완료 처리
+        set({ isLoaded: true });
       }
-      return;
-    }
-
-    if (data && data.data) {
-      // 타입 안전성을 위해 검증하면 좋지만, MVP에서는 직접 적용
-      set((state) => ({
-        ...state,
-        ...data.data,
-      }));
-      console.log("데이터 불러오기 완료");
+    } catch (error) {
+      // 에러 발생 시에도 일단 로드 완료 처리하여 게임 진행은 가능하게 함
+      set({ isLoaded: true });
     }
   },
 }));

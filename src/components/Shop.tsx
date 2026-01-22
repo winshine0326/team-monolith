@@ -54,8 +54,12 @@ export function Shop() {
 
             return (
               <Card key={cropType} className="border-2 overflow-hidden">
-                <div className="h-24 bg-slate-100 flex items-center justify-center text-5xl">
-                  {crop.emoji.ready}
+                <div className="h-24 bg-slate-100 flex items-center justify-center p-2">
+                  <img
+                    src={crop.emoji.ready}
+                    alt={crop.name}
+                    className="h-full w-full object-contain"
+                  />
                 </div>
                 <CardContent className="p-4 pt-4">
                   <div className="flex justify-between items-start mb-2">
