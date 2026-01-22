@@ -23,6 +23,8 @@ for x in range(4):
 - Monaco Editor (코드 에디터)
 - OpenAI API (코드 해석)
 - Vite
+- supabase
+- google Oauth
 
 ## AI에게 전달한 초기 요구사항
 
