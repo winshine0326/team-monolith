@@ -102,7 +102,7 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 VITE_OPENAI_API_KEY=your_openai_api_key
 ```
 
-### 5. 실행
+### 4. 실행
 
 ```bash
 npm run dev
