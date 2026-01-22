@@ -1,21 +1,21 @@
 # Code Farm - 개발 TODO
 
-## Phase 1: 프로젝트 셋업 (30분)
+## Phase 1: 프로젝트 셋업 (30분) ✅
 
 ### 의존성 설치
-- [ ] Tailwind CSS 설치 및 설정
-- [ ] shadcn/ui 초기화
-- [ ] Monaco Editor 설치 (`@monaco-editor/react`)
-- [ ] Zustand 설치
-- [ ] TanStack Query 설치
-- [ ] OpenAI SDK 설치
+- [x] Tailwind CSS 설치 및 설정
+- [x] shadcn/ui 초기화
+- [x] Monaco Editor 설치 (`@monaco-editor/react`)
+- [x] Zustand 설치
+- [x] TanStack Query 설치
+- [x] OpenAI SDK 설치
 
 ### 프로젝트 구조 생성
-- [ ] `src/components/` 폴더 생성
-- [ ] `src/hooks/` 폴더 생성
-- [ ] `src/lib/` 폴더 생성
-- [ ] `src/types/` 폴더 생성
-- [ ] 환경 변수 설정 (`.env` 파일)
+- [x] `src/components/` 폴더 생성
+- [x] `src/hooks/` 폴더 생성
+- [x] `src/lib/` 폴더 생성
+- [x] `src/types/` 폴더 생성
+- [x] 환경 변수 설정 (`.env` 파일)
 
 ---
 
