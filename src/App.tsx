@@ -30,12 +30,19 @@ function GameApp() {
       { code, gameState },
       {
         onSuccess: (result) => {
+          console.log("📥 실행 결과:", result);
           if (result.success) {
+            console.log("🎯 액션 실행 시작:", result.actions.length, "개");
             gameState.executeActions(result.actions);
             if (result.message) {
               console.log("✅", result.message);
             }
+          } else {
+            console.error("❌ 실행 실패:", result.error);
           }
+        },
+        onError: (error) => {
+          console.error("💥 API 에러:", error);
         },
       }
     );
