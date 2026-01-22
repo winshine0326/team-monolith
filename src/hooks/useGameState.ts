@@ -1,10 +1,12 @@
 import { create } from "zustand";
-import type { GameState, Tile, FarmAction } from "@/types/game";
+import type { GameState, Tile, FarmAction, CropType } from "@/types/game";
 import { GAME_CONFIG, CROPS } from "@/lib/constants";
 
 interface GameStore extends GameState {
   // 액션 실행
   executeActions: (actions: FarmAction[]) => void;
+  // 씨앗 구매
+  buySeed: (crop: CropType, amount: number) => void;
   // 리셋
   reset: () => void;
 }
@@ -48,7 +50,12 @@ export const useGameState = create<GameStore>((set) => ({
           const { x, y, crop } = action;
 
           // 유효성 검사
-          if (x < 0 || x >= GAME_CONFIG.GRID_SIZE || y < 0 || y >= GAME_CONFIG.GRID_SIZE) {
+          if (
+            x < 0 ||
+            x >= GAME_CONFIG.GRID_SIZE ||
+            y < 0 ||
+            y >= GAME_CONFIG.GRID_SIZE
+          ) {
             console.warn(`범위 벗어남: (${x}, ${y})`);
             continue;
           }
@@ -75,7 +82,12 @@ export const useGameState = create<GameStore>((set) => ({
           const { x, y } = action;
 
           // 유효성 검사
-          if (x < 0 || x >= GAME_CONFIG.GRID_SIZE || y < 0 || y >= GAME_CONFIG.GRID_SIZE) {
+          if (
+            x < 0 ||
+            x >= GAME_CONFIG.GRID_SIZE ||
+            y < 0 ||
+            y >= GAME_CONFIG.GRID_SIZE
+          ) {
             console.warn(`범위 벗어남: (${x}, ${y})`);
             continue;
           }
@@ -107,7 +119,11 @@ export const useGameState = create<GameStore>((set) => ({
           for (let y = 0; y < GAME_CONFIG.GRID_SIZE; y++) {
             for (let x = 0; x < GAME_CONFIG.GRID_SIZE; x++) {
               const tile = newGrid[y][x];
-              if (tile.state !== "empty" && tile.crop && tile.state !== "ready") {
+              if (
+                tile.state !== "empty" &&
+                tile.crop &&
+                tile.state !== "ready"
+              ) {
                 const cropInfo = CROPS[tile.crop];
                 tile.growthProgress += 100 / cropInfo.growthTime;
 
@@ -126,7 +142,12 @@ export const useGameState = create<GameStore>((set) => ({
           const { x, y } = action;
 
           // 유효성 검사
-          if (x < 0 || x >= GAME_CONFIG.GRID_SIZE || y < 0 || y >= GAME_CONFIG.GRID_SIZE) {
+          if (
+            x < 0 ||
+            x >= GAME_CONFIG.GRID_SIZE ||
+            y < 0 ||
+            y >= GAME_CONFIG.GRID_SIZE
+          ) {
             console.warn(`범위 벗어남: (${x}, ${y})`);
             continue;
           }
@@ -167,6 +188,24 @@ export const useGameState = create<GameStore>((set) => ({
       return {
         ...newState,
         grid: newGrid,
+      };
+    }),
+
+  buySeed: (crop, amount) =>
+    set((state) => {
+      const cropInfo = CROPS[crop];
+      const cost = cropInfo.seedCost * amount;
+
+      if (state.gold < cost) {
+        return state; // 골드 부족 (UI에서 처리하지만 안전장치)
+      }
+
+      return {
+        gold: state.gold - cost,
+        seeds: {
+          ...state.seeds,
+          [crop]: state.seeds[crop] + amount,
+        },
       };
     }),
 

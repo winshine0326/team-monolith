@@ -10,6 +10,7 @@ import { useCodeExecution } from "./hooks/useCodeExecution";
 import { DEFAULT_CODE } from "./lib/constants";
 import { checkApiKey } from "./lib/openai";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
+import { Shop } from "./components/Shop";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +45,7 @@ function GameApp() {
         onError: (error) => {
           console.error("💥 API 에러:", error);
         },
-      }
+      },
     );
   };
 
@@ -61,18 +62,34 @@ function GameApp() {
         <div className="p-4">
           <Card className="bg-yellow-50 border-yellow-500">
             <CardHeader>
-              <CardTitle className="text-yellow-700">⚠️ OpenAI API 키가 설정되지 않았습니다</CardTitle>
+              <CardTitle className="text-yellow-700">
+                ⚠️ OpenAI API 키가 설정되지 않았습니다
+              </CardTitle>
             </CardHeader>
             <CardContent className="text-sm text-yellow-600">
               <p>코드를 실행하려면 OpenAI API 키가 필요합니다.</p>
               <p className="mt-2">
-                1. 프로젝트 루트의 <code className="bg-yellow-100 px-1 py-0.5 rounded">.env</code> 파일을 열고
+                1. 프로젝트 루트의{" "}
+                <code className="bg-yellow-100 px-1 py-0.5 rounded">.env</code>{" "}
+                파일을 열고
               </p>
               <p className="mt-1">
-                2. <code className="bg-yellow-100 px-1 py-0.5 rounded">VITE_OPENAI_API_KEY=your_api_key_here</code>에 실제 API 키를 입력하세요
+                2.{" "}
+                <code className="bg-yellow-100 px-1 py-0.5 rounded">
+                  VITE_OPENAI_API_KEY=your_api_key_here
+                </code>
+                에 실제 API 키를 입력하세요
               </p>
               <p className="mt-2 text-xs">
-                API 키는 <a href="https://platform.openai.com/api-keys" target="_blank" className="underline">platform.openai.com</a>에서 발급받을 수 있습니다.
+                API 키는{" "}
+                <a
+                  href="https://platform.openai.com/api-keys"
+                  target="_blank"
+                  className="underline"
+                >
+                  platform.openai.com
+                </a>
+                에서 발급받을 수 있습니다.
               </p>
             </CardContent>
           </Card>
@@ -117,9 +134,13 @@ function GameApp() {
                 <div className="text-sm">
                   {data.success ? (
                     <>
-                      <div className="font-medium text-green-700">✅ 실행 성공!</div>
+                      <div className="font-medium text-green-700">
+                        ✅ 실행 성공!
+                      </div>
                       {data.message && (
-                        <div className="text-green-600 mt-1">{data.message}</div>
+                        <div className="text-green-600 mt-1">
+                          {data.message}
+                        </div>
                       )}
                       {data.actions.length > 0 && (
                         <div className="text-xs text-green-600 mt-1">
@@ -139,6 +160,9 @@ function GameApp() {
           )}
         </div>
       </div>
+
+      {/* 상점 */}
+      <Shop />
     </div>
   );
 }
