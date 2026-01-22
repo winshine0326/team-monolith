@@ -35,10 +35,11 @@ export function FarmTile({ tile }: FarmTileProps) {
   return (
     <div
       className={cn(
-        "aspect-square flex items-center justify-center text-4xl",
+        "aspect-square flex items-center justify-center text-5xl",
         "border-2 border-border rounded-lg bg-card",
-        "transition-all hover:scale-105 cursor-pointer",
-        tile.state === "ready" && "ring-2 ring-primary animate-pulse"
+        "transition-all hover:scale-105",
+        "shadow-sm hover:shadow-md",
+        tile.state === "ready" && "ring-2 ring-green-500 animate-pulse bg-green-50"
       )}
     >
       {getEmoji()}

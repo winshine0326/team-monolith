@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { GameState, Tile, FarmAction, CropType } from "@/types/game";
+import type { GameState, Tile, FarmAction } from "@/types/game";
 import { GAME_CONFIG, CROPS } from "@/lib/constants";
 
 interface GameStore extends GameState {

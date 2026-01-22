@@ -1,5 +1,5 @@
 import { openai } from "./openai";
-import type { GameState, CodeExecutionResult, FarmAction } from "@/types/game";
+import type { GameState, CodeExecutionResult } from "@/types/game";
 
 // 프롬프트 생성
 function createPrompt(code: string, gameState: GameState): string {
@@ -16,7 +16,7 @@ ${gameState.grid
   .map(
     (row, y) =>
       `y=${y}: ${row
-        .map((tile, x) => {
+        .map((tile) => {
           if (tile.state === "empty") return "빈땅";
           return `${tile.crop}(${tile.state})`;
         })

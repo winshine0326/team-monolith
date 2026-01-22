@@ -9,7 +9,7 @@ import { useGameState } from "./hooks/useGameState";
 import { useCodeExecution } from "./hooks/useCodeExecution";
 import { DEFAULT_CODE } from "./lib/constants";
 import { checkApiKey } from "./lib/openai";
-import { Card, CardContent } from "./components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +23,6 @@ function GameApp() {
 
   const handleExecute = () => {
     if (!hasApiKey) {
-      alert("OpenAI API 키를 .env 파일에 설정해주세요!\nVITE_OPENAI_API_KEY=your_key_here");
       return;
     }
 
@@ -36,12 +35,7 @@ function GameApp() {
             if (result.message) {
               console.log("✅", result.message);
             }
-          } else {
-            alert(`❌ 에러: ${result.error}`);
           }
-        },
-        onError: (error) => {
-          alert(`❌ 실행 오류: ${error.message}`);
         },
       }
     );
@@ -54,6 +48,29 @@ function GameApp() {
   return (
     <div className="min-h-screen flex flex-col">
       <GameHeader />
+
+      {/* API 키 경고 */}
+      {!hasApiKey && (
+        <div className="p-4">
+          <Card className="bg-yellow-50 border-yellow-500">
+            <CardHeader>
+              <CardTitle className="text-yellow-700">⚠️ OpenAI API 키가 설정되지 않았습니다</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-yellow-600">
+              <p>코드를 실행하려면 OpenAI API 키가 필요합니다.</p>
+              <p className="mt-2">
+                1. 프로젝트 루트의 <code className="bg-yellow-100 px-1 py-0.5 rounded">.env</code> 파일을 열고
+              </p>
+              <p className="mt-1">
+                2. <code className="bg-yellow-100 px-1 py-0.5 rounded">VITE_OPENAI_API_KEY=your_api_key_here</code>에 실제 API 키를 입력하세요
+              </p>
+              <p className="mt-2 text-xs">
+                API 키는 <a href="https://platform.openai.com/api-keys" target="_blank" className="underline">platform.openai.com</a>에서 발급받을 수 있습니다.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
         {/* 왼쪽: 농장 */}
@@ -83,7 +100,7 @@ function GameApp() {
           <ExecuteButton
             onExecute={handleExecute}
             onReset={handleCodeReset}
-            isLoading={isPending}
+            isLoading={isPending || !hasApiKey}
           />
 
           {/* 결과 메시지 */}
