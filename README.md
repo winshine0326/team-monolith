@@ -77,10 +77,10 @@ for x in range(4):
 
 ## 서비스 화면
 
-![alt text](image.png)
-![alt text](image-6.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
+![alt text](/demonstration/image.png)
+![alt text](/demonstration/image-6.png)
+![alt text](/demonstration/image-1.png)
+![alt text](/demonstration/image-2.png)
+![alt text](/demonstration/image-3.png)
+![alt text](/demonstration/image-4.png)
+![alt text](/demonstration/image-5.png)
