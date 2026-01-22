@@ -75,6 +75,39 @@ for x in range(4):
 각 테스크가 끝나면 진행상황을 알 수 있도록 체크박스에 표시해줘.
 ```
 
+## 실행 방법 (How to Run)
+
+### 1. 필수 조건
+
+- Node.js (v18 이상 권장)
+- Supabase 계정 및 프로젝트
+- Google Cloud Platform 프로젝트 (OAuth 용)
+- OpenAI API Key
+
+### 2. 프로젝트 설치
+
+```bash
+git clone https://github.com/winshine0326/team-monolith.git
+cd team-monolith
+npm install
+```
+
+### 3. 환경 변수 설정
+
+프로젝트 루트에 `.env` 파일을 생성하고 다음 변수들을 설정하세요.
+
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_OPENAI_API_KEY=your_openai_api_key
+```
+
+### 5. 실행
+
+```bash
+npm run dev
+```
+
 ## 서비스 화면
 
 ![alt text](/demonstration/image.png)
