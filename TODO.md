@@ -19,59 +19,59 @@
 
 ---
 
-## Phase 2: 코어 기능 (50분)
+## Phase 2: 코어 기능 (50분) ✅
 
 ### 타입 정의
-- [ ] `src/types/game.ts` 생성
-  - [ ] `CropType` 타입
-  - [ ] `TileState` 타입
-  - [ ] `Tile` 인터페이스
-  - [ ] `GameState` 인터페이스
-  - [ ] `CodeExecutionResult` 인터페이스
-  - [ ] `FarmAction` 타입
+- [x] `src/types/game.ts` 생성
+  - [x] `CropType` 타입
+  - [x] `TileState` 타입
+  - [x] `Tile` 인터페이스
+  - [x] `GameState` 인터페이스
+  - [x] `CodeExecutionResult` 인터페이스
+  - [x] `FarmAction` 타입
 
 ### 상수 정의
-- [ ] `src/lib/constants.ts` 생성
-  - [ ] `GAME_CONFIG` 상수
-  - [ ] 작물 정보 (carrot, tomato 등)
-  - [ ] 초기 게임 설정
+- [x] `src/lib/constants.ts` 생성
+  - [x] `GAME_CONFIG` 상수
+  - [x] 작물 정보 (carrot, tomato 등)
+  - [x] 초기 게임 설정
 
 ### 농장 그리드 UI
-- [ ] `src/components/FarmTile.tsx` 생성
-  - [ ] 타일 상태별 이모지 표시 (🟫 🌱 🌿 🥕)
-  - [ ] 타일 클릭 이벤트 (선택 사항)
-- [ ] `src/components/FarmGrid.tsx` 생성
-  - [ ] 4x4 그리드 레이아웃
-  - [ ] FarmTile 렌더링
+- [x] `src/components/FarmTile.tsx` 생성
+  - [x] 타일 상태별 이모지 표시 (🟫 🌱 🌿 🥕)
+  - [x] 타일 클릭 이벤트 (선택 사항)
+- [x] `src/components/FarmGrid.tsx` 생성
+  - [x] 4x4 그리드 레이아웃
+  - [x] FarmTile 렌더링
 
 ### 코드 에디터
-- [ ] `src/components/CodeEditor.tsx` 생성
-  - [ ] Monaco Editor 통합
-  - [ ] Python 문법 하이라이팅 설정
-  - [ ] 기본 템플릿 코드 제공
-  - [ ] 코드 상태 관리
+- [x] `src/components/CodeEditor.tsx` 생성
+  - [x] Monaco Editor 통합
+  - [x] Python 문법 하이라이팅 설정
+  - [x] 기본 템플릿 코드 제공
+  - [x] 코드 상태 관리
 
 ### OpenAI API 연동
-- [ ] `src/lib/openai.ts` 생성
-  - [ ] OpenAI 클라이언트 초기화
-  - [ ] API 호출 함수
-- [ ] `src/lib/interpreter.ts` 생성
-  - [ ] 코드 해석 프롬프트 생성
-  - [ ] 액션 리스트 파싱
-  - [ ] 에러 핸들링
+- [x] `src/lib/openai.ts` 생성
+  - [x] OpenAI 클라이언트 초기화
+  - [x] API 호출 함수
+- [x] `src/lib/interpreter.ts` 생성
+  - [x] 코드 해석 프롬프트 생성
+  - [x] 액션 리스트 파싱
+  - [x] 에러 핸들링
 
 ### 게임 상태 관리
-- [ ] `src/hooks/useGameState.ts` 생성
-  - [ ] Zustand 스토어 설정
-  - [ ] 초기 게임 상태 (gold: 100, 4x4 빈 그리드)
-  - [ ] 농장 액션 실행 함수 (plant, water, harvest)
-  - [ ] 골드/씨앗 업데이트 로직
+- [x] `src/hooks/useGameState.ts` 생성
+  - [x] Zustand 스토어 설정
+  - [x] 초기 게임 상태 (gold: 100, 4x4 빈 그리드)
+  - [x] 농장 액션 실행 함수 (plant, water, harvest)
+  - [x] 골드/씨앗 업데이트 로직
 
 ### 코드 실행 로직
-- [ ] `src/hooks/useCodeExecution.ts` 생성
-  - [ ] TanStack Query 설정
-  - [ ] OpenAI API 호출
-  - [ ] 액션 리스트 적용
+- [x] `src/hooks/useCodeExecution.ts` 생성
+  - [x] TanStack Query 설정
+  - [x] OpenAI API 호출
+  - [x] 액션 리스트 적용
 
 ---
 
