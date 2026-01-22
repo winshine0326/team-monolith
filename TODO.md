@@ -166,6 +166,35 @@
   - [x] 상점 버튼/토글
   - [x] 레이아웃 조정
 
+## Phase 5: 백엔드 통합 (Supabase)
+
+### 프로젝트 설정
+
+- [ ] Supabase 프로젝트 생성
+- [ ] `.env`에 Supabase URL 및 anon key 설정
+- [ ] `@supabase/supabase-js` 설치
+- [ ] `src/lib/supabase.ts` 클라이언트 설정
+
+### 인증 (Auth)
+
+- [ ] Google OAuth 설정 (Supabase 대시보드)
+- [ ] `src/lib/auth.ts` 인증 함수 구현 (login, logout, getUser)
+- [ ] `src/components/Login.tsx` 로그인 페이지/모달 생성
+- [ ] App에 로그인 상태 연동
+
+### 데이터베이스 (DB)
+
+- [ ] 테이블 설계
+  - [ ] `users`: 사용자 정보
+  - [ ] `save_data`: 게임 상태 (gold, seeds, grid, items 등)
+- [ ] RLS (Row Level Security) 정책 설정
+
+### 게임 연동
+
+- [ ] 게임 저장 로직 (`saveGame`)
+- [ ] 게임 불러오기 로직 (`loadGame`)
+- [ ] 자동 저장 기능 (선택 사항)
+
 ## 체크리스트 (성공 기준) ✅
 
 - [x] 코드 에디터에 파이썬 코드 작성 가능

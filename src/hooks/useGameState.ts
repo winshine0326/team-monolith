@@ -2,6 +2,8 @@ import { create } from "zustand";
 import type { GameState, Tile, FarmAction, CropType } from "@/types/game";
 import { GAME_CONFIG, CROPS } from "@/lib/constants";
 
+import { supabase } from "@/lib/supabase";
+
 interface GameStore extends GameState {
   // 액션 실행
   executeActions: (actions: FarmAction[]) => void;
@@ -11,6 +13,10 @@ interface GameStore extends GameState {
   resetHarvestIncome: () => void;
   // 리셋
   reset: () => void;
+
+  // 데이터 동기화
+  saveGame: (userId: string) => Promise<void>;
+  loadGame: (userId: string) => Promise<void>;
 }
 
 // 초기 그리드 생성
@@ -40,7 +46,7 @@ const initialState: GameState = {
   lastHarvestIncome: null,
 };
 
-export const useGameState = create<GameStore>((set) => ({
+export const useGameState = create<GameStore>((set, get) => ({
   ...initialState,
 
   executeActions: (actions) =>
@@ -222,4 +228,52 @@ export const useGameState = create<GameStore>((set) => ({
   resetHarvestIncome: () => set({ lastHarvestIncome: null }),
 
   reset: () => set(initialState),
+
+  saveGame: async (userId) => {
+    const state = get();
+    // 저장할 데이터 (grid, gold, seeds, day)
+    const saveData = {
+      grid: state.grid,
+      gold: state.gold,
+      seeds: state.seeds,
+      day: state.day,
+    };
+
+    const { error } = await supabase.from("game_saves").upsert({
+      user_id: userId,
+      data: saveData,
+      updated_at: new Date().toISOString(),
+    });
+
+    if (error) {
+      console.error("데이터 저장 실패:", error);
+    } else {
+      console.log("데이터 저장 완료");
+    }
+  },
+
+  loadGame: async (userId) => {
+    const { data, error } = await supabase
+      .from("game_saves")
+      .select("data")
+      .eq("user_id", userId)
+      .single();
+
+    if (error) {
+      if (error.code !== "PGRST116") {
+        // 데이터 없음 에러가 아닐 경우
+        console.error("데이터 불러오기 실패:", error);
+      }
+      return;
+    }
+
+    if (data && data.data) {
+      // 타입 안전성을 위해 검증하면 좋지만, MVP에서는 직접 적용
+      set((state) => ({
+        ...state,
+        ...data.data,
+      }));
+      console.log("데이터 불러오기 완료");
+    }
+  },
 }));

@@ -12,6 +12,7 @@ import { checkApiKey } from "./lib/openai";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { Shop } from "./components/Shop";
 import { HarvestModal } from "./components/HarvestModal";
+import { LoginButton } from "./components/LoginButton";
 
 const queryClient = new QueryClient();
 
@@ -56,7 +57,12 @@ function GameApp() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <GameHeader />
+      <div className="relative">
+        <GameHeader />
+        <div className="absolute top-4 right-4 z-10">
+          <LoginButton />
+        </div>
+      </div>
 
       {/* API 키 경고 */}
       {!hasApiKey && (
