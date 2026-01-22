@@ -75,35 +75,35 @@
 
 ---
 
-## Phase 3: 게임 로직 (25분)
+## Phase 3: 게임 로직 (25분) ✅
 
 ### UI 컴포넌트
-- [ ] `src/components/GameHeader.tsx` 생성
-  - [ ] 골드 표시 (💰 100G)
-  - [ ] 타이틀 표시 (🌾 Code Farm)
-- [ ] `src/components/ExecuteButton.tsx` 생성
-  - [ ] ▶️ 실행 버튼
-  - [ ] 🔄 리셋 버튼
-  - [ ] 로딩 상태 표시
+- [x] `src/components/GameHeader.tsx` 생성
+  - [x] 골드 표시 (💰 100G)
+  - [x] 타이틀 표시 (🌾 Code Farm)
+- [x] `src/components/ExecuteButton.tsx` 생성
+  - [x] ▶️ 실행 버튼
+  - [x] 🔄 리셋 버튼
+  - [x] 로딩 상태 표시
 
 ### 경제 시스템
-- [ ] 씨앗 구매 로직
-  - [ ] 골드 차감
-  - [ ] 씨앗 재고 확인
-- [ ] 작물 판매 로직
-  - [ ] 수확 시 골드 증가
-  - [ ] 판매 가격 적용
+- [x] 씨앗 구매 로직
+  - [x] 골드 차감
+  - [x] 씨앗 재고 확인
+- [x] 작물 판매 로직
+  - [x] 수확 시 골드 증가
+  - [x] 판매 가격 적용
 
 ### 미션 시스템
-- [ ] `src/components/MissionPanel.tsx` 생성
-  - [ ] 현재 미션 표시
-  - [ ] 힌트 표시
-  - [ ] 미션 완료 체크
-- [ ] `src/lib/missions.ts` 생성
-  - [ ] Mission 1: 첫 작물 심기
-  - [ ] Mission 2: 물 주기
-  - [ ] Mission 3: for문으로 심기 (선택)
-  - [ ] Mission 4: if문으로 수확 (선택)
+- [x] `src/components/MissionPanel.tsx` 생성
+  - [x] 현재 미션 표시
+  - [x] 힌트 표시
+  - [x] 미션 완료 체크
+- [x] `src/lib/missions.ts` 생성
+  - [x] Mission 1: 첫 작물 심기
+  - [x] Mission 2: 물 주기
+  - [x] Mission 3: for문으로 심기
+  - [x] Mission 4: 수확하기
 
 ---
 
